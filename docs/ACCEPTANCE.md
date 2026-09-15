@@ -9,7 +9,7 @@
 
 ## Browser and accessibility
 - Opening offers a legal first delivery without setup. Complete a real round, see the postcard, replay it and start another round.
-- All six rounds are accessible directly. Switching rounds starts a fresh attempt and never corrupts a saved best score.
+- All six rounds are accessible directly. Switching rounds starts a fresh attempt without carrying over another round’s state.
 - Desktop 1440×1000, mobile 390×844 and narrow 320px have no clipped essential controls or horizontal overflow.
 - Keyboard-only play reaches a complete round. Focus remains visible after moves, undo and closing help/postcard. Buttons have useful accessible names. Status announces deliveries and tide changes politely, not every decorative rerender.
 - Current tide, next phase and route availability are readable without color. Reduced motion and blocked localStorage still allow completion.

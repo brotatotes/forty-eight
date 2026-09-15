@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 test('production build removes stale output and repeats with identical hashes', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'tidepost-build-'));
   try {
-    for (const path of ['scripts', 'index.html', 'src', 'public']) await cp(new URL(`../${path}`, import.meta.url), join(dir, path), {recursive:true});
+    for (const path of ['scripts', 'index.html', 'presentation.html', 'demo.html', 'src', 'public']) await cp(new URL(`../${path}`, import.meta.url), join(dir, path), {recursive:true});
     await mkdir(join(dir, 'dist'));
     await writeFile(join(dir, 'dist', 'stale.txt'), 'This file must not ship.');
     const build = () => execFileSync(process.execPath, ['scripts/build.mjs'], {cwd:dir, encoding:'utf8'});
@@ -17,7 +17,7 @@ test('production build removes stale output and repeats with identical hashes', 
     const manifest = await readFile(join(dir, 'dist', 'build-manifest.json'), 'utf8');
     await assert.rejects(readFile(join(dir, 'dist', 'stale.txt')), {code:'ENOENT'});
     for (const [path, expected] of Object.entries(JSON.parse(manifest))) {
-      assert.ok(path === 'index.html' || path.startsWith('src/') || path.startsWith('public/'));
+      assert.ok(['index.html', 'presentation.html', 'demo.html'].includes(path) || path.startsWith('src/') || path.startsWith('public/'));
       assert.equal(createHash('sha256').update(await readFile(join(dir, 'dist', path))).digest('hex'), expected);
     }
     build();

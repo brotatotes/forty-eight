@@ -1,6 +1,6 @@
 {
   "name": "tidepost",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Three letters. A changing tide. Find your way home.",
@@ -8,6 +8,8 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node tests/browser-smoke.mjs",
+    "test:delivery": "node tests/delivery-browser.mjs",
+    "package": "python3 scripts/package.py",
     "start": "node scripts/serve.mjs"
   },
   "engines": { "node": ">=22" },

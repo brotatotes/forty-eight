@@ -6,6 +6,8 @@ A quiet, turn-based postal puzzle for the browser. Cross bridges, catch ferries,
 
 Six small authored rounds. Unlimited undo. No timer, accounts, analytics, downloaded fonts, runtime dependencies or API calls.
 
+[Play Tidepost](https://brotatotes.github.io/forty-eight/) · [Five-slide story](https://brotatotes.github.io/forty-eight/presentation.html) · [Watch a real round](https://brotatotes.github.io/forty-eight/demo.html) · [Download releases](https://github.com/brotatotes/forty-eight/releases)
+
 ## Run locally
 
 Requires Node.js 22 or newer. No package install is needed.
@@ -47,9 +49,31 @@ A pure engine owns the rules. An independent breadth-first reference solver chec
 - `src/art.js` contains original SVG line drawings.
 - `docs/` records the design, acceptance criteria and demo plan.
 
-## Status
+## Presentation and demo
 
-Playable development build. Release verification, public hosting, presentation and recorded demo are in progress. This source does not yet claim a verified public release.
+The [five-slide presentation](https://brotatotes.github.io/forty-eight/presentation.html) explains the idea, design, actual experience, implementation and deliberate limits. Use the slide links or arrow keys, or print a five-page landscape copy.
+
+The [67-second recorded demo](https://brotatotes.github.io/forty-eight/demo.html) completes a real five-turn round and downloads its postcard. It includes on-screen captions, an optional caption track, a transcript and a downloadable MP4. No audio is required.
+
+With the production server running, `npm run test:delivery` checks both pages at four widths, slide keyboard navigation, image loading, video playback and seeking, and caption delivery. It also generates a private print PDF. All browser checks use isolated Chromium contexts. These are focused usability and accessibility checks, not universal browser or accessibility certification.
+
+## Reproduce a release
+
+From a clean committed checkout, with Node.js 22+ and Python 3 installed:
+
+```sh
+npm test
+npm run build
+python3 scripts/package.py
+```
+
+The small release ZIP contains source, the ready-built `dist` folder, the presentation and recorded demo, plus `RELEASE.json` with the exact source commit and build identity. ZIP filenames, order, timestamps and permissions are fixed. The same checkout and toolchain produce identical archive bytes. `SHA256SUMS.txt` accompanies the archive.
+
+After extracting, run `npm start` in the `tidepost` folder. No install, account or internet connection is required. A local HTTP server is needed because browser security restricts JavaScript modules under `file://`.
+
+## Deliberate limits
+
+Six authored rounds rather than endless generated content. No cloud saves or persistence across reloads, scoreboards, sound requirements, telemetry or runtime services. Hosted delivery uses GitHub Pages and inherits its availability. All game state stays in the current tab.
 
 ## License
 

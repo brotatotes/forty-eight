@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 // dist is generated output. A clean allowlist build must never retain old files.
 await rm('dist', {recursive:true, force:true});
 await mkdir('dist', {recursive:true});
-for (const path of ['index.html','src','public']) await cp(path, `dist/${path}`, {recursive:true});
+for (const path of ['index.html','presentation.html','demo.html','src','public']) await cp(path, `dist/${path}`, {recursive:true});
 const manifest = {};
 async function walk(dir) {
   for (const item of (await readdir(dir,{withFileTypes:true})).sort((a,b) => a.name.localeCompare(b.name))) {

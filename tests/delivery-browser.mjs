@@ -27,10 +27,13 @@ try {
   await page.goto(new URL('presentation.html', base.endsWith('/') ? base : base + '/').href);
   assert.equal(await page.locator('.slide').count(),5);
   await page.keyboard.press('ArrowRight');
+  await page.waitForURL(url => url.hash === '#slide-2');
   assert.equal(new URL(page.url()).hash,'#slide-2');
   await page.keyboard.press('ArrowLeft');
+  await page.waitForURL(url => url.hash === '#slide-1');
   assert.equal(new URL(page.url()).hash,'#slide-1');
   await page.locator('.deck-controls a').nth(4).click();
+  await page.waitForURL(url => url.hash === '#slide-5');
   assert.equal(new URL(page.url()).hash,'#slide-5');
   await page.emulateMedia({media:'print'});
   await page.pdf({path:`${output}/presentation.pdf`,preferCSSPageSize:true,printBackground:true});

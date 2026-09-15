@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f2e6">
+  <meta name="description" content="A quiet postal puzzle on a changing tide. Deliver three letters, find your way home, and keep a little piece of the journey.">
+  <title>Tidepost · A little island postal puzzle</title>
+  <link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <a class="skip" href="#chart">Skip to the sea chart</a>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="Tidepost home"><span class="brand-mark" aria-hidden="true">≋</span> Tidepost<span class="brand-small">ISLAND POSTAL SERVICE</span></a>
+    <button id="help-open" class="quiet">How to play <span aria-hidden="true">↗</span></button>
+  </header>
+  <main>
+    <div class="opening"><div><p class="eyebrow">A LITTLE ROUTE. A LITTLE PATIENCE.</p><h1>The sea has a schedule.<br><em>You have three letters.</em></h1></div><p class="intro">Find a way across the islands.<br>Deliver the post. Make it home.<br><span>No clock. No rush.</span></p></div>
+    <section class="fieldbook" aria-label="Tidepost game">
+      <div class="chart-column">
+        <div class="chart-heading"><div><p class="eyebrow" id="round-number">POSTAL ROUND 01 / 06</p><h2 id="round-title">First light</h2></div><label class="round-picker">Choose a round<select id="round-select" aria-label="Choose a round"><option value="0">01 · First light</option></select></label></div>
+        <div id="chart" class="chart" tabindex="-1" role="group" aria-label="Sea chart. Choose an island or use the routes list.">
+          <svg class="sea-art" viewBox="0 0 700 520" aria-hidden="true"><defs><pattern id="waves" width="72" height="50" patternUnits="userSpaceOnUse"><path d="M7 25q7-5 14 0t14 0" fill="none" stroke="#80a69d" stroke-width="1" opacity=".35"/></pattern></defs><rect width="700" height="520" fill="url(#waves)"/><g class="compass" transform="translate(640 65)"><text y="-26">N</text><path d="M0-19 5 0 0 19-5 0Z M-19 0H19"/></g><text x="28" y="490" class="sea-label">THE LITTLE REACH</text><path d="M563 455q7-8 14 0q7-8 14 0m-39 12q7-8 14 0q7-8 14 0" fill="none" stroke="#557f79"/></svg>
+          <svg id="routes-art" viewBox="0 0 700 520" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div id="islands"></div>
+          <span class="chart-note">CHART No. <span id="chart-id">001</span> <span aria-hidden="true">·</span> NOT FOR NAVIGATION</span>
+        </div>
+        <div class="legend" aria-label="Route key"><span><i class="bridge"></i> Bridge <small>always</small></span><span><i class="causeway"></i> Causeway <small>low / falling</small></span><span><i class="ferry"></i> Ferry <small>rising / high</small></span></div>
+      </div>
+      <aside class="journal" aria-label="Your postal round">
+        <div class="tide-card"><div class="section-label">THE TIDE RIGHT NOW <span id="tide-symbol" aria-hidden="true">▁</span></div><div class="tide-name" id="tide-name">Low water</div><div class="forecast" id="forecast"></div><p class="tiny">The tide changes after each move or wait.</p></div>
+        <div class="mail-section"><div class="section-label">IN YOUR SATCHEL <span id="mail-count">0 / 3</span></div><ul class="mail-list" id="mail-list"></ul></div>
+        <div class="route-section"><div class="section-label">FROM <span id="position-name">Post office</span></div><div id="route-list" class="route-list"></div></div>
+        <div class="actions"><p id="round-challenge" class="tiny round-challenge"></p><button id="wait" class="primary">Wait for the tide <span aria-hidden="true">↻</span></button><div class="minor-actions"><button id="undo" class="quiet" disabled>↶ Undo</button><span><strong id="turn-count">0</strong> turns</span><button id="restart" class="quiet">Restart</button></div></div>
+        <p id="guidance" class="guidance" role="status" aria-live="polite">Your first letter is for Tern House. Take the bridge to get started.</p>
+      </aside>
+    </section>
+    <footer class="page-footer"><span>Three letters. A changing tide. Find your way home.</span><span>A small game, made with care. <a href="https://github.com/brotatotes/forty-eight">Source ↗</a></span></footer>
+  </main>
+  <dialog id="help-dialog" aria-labelledby="help-title"><button class="dialog-close quiet" data-close="help-dialog" aria-label="Close instructions">✕</button><p class="eyebrow">WELCOME TO THE ISLAND POST</p><h2 id="help-title">Take your time.<br>The letters can wait.</h2><ol class="instructions"><li><strong>Deliver three letters.</strong> Choose a connected island on the chart or in the route list. Mail is delivered automatically when you arrive.</li><li><strong>Read the tide.</strong> Bridges are always open. Causeways open at Low and Falling. Ferries run at Rising and High.</li><li><strong>Every action turns the tide.</strong> A move or a wait advances one phase. Check the tide before crossing. Time never passes by itself.</li><li><strong>Come home.</strong> Return to the post office with an empty satchel to earn a route postcard.</li></ol><p>There is no timer or wrong turn. Undo as often as you like. Use Tab and Enter to play by keyboard.</p><button class="primary" data-close="help-dialog">Let's deliver some letters</button></dialog>
+  <dialog id="postcard-dialog" aria-labelledby="postcard-title"><button class="dialog-close quiet" data-close="postcard-dialog" aria-label="Close postcard">✕</button><p class="eyebrow">SIGNED, SEALED, DELIVERED</p><h2 id="postcard-title">Home before the kettle boils.</h2><div id="postcard-art"></div><p id="postcard-summary"></p><div class="postcard-actions"><button id="download-card" class="quiet">↓ Keep this postcard</button><button id="replay" class="quiet">↶ Replay this route</button><button id="next-round" class="primary">Next round →</button></div></dialog>
+  <noscript><p class="noscript">Tidepost needs JavaScript to run its local puzzle engine. No data leaves your browser.</p></noscript>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
